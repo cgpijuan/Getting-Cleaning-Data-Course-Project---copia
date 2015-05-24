@@ -1,0 +1,148 @@
+---
+title: "Readme"
+author: "Carmen Gonzalez"
+date: "Sunday, May 24, 2015"
+output: html_document
+---
+
+## Setup
+The script run_analysis.R contained in this folder was developed in R Studio Version 0.98.1103, in a Windows 7 64 bit platform. In order to execute it, the reshape2 package must be installed and loaded.
+
+
+
+## General Descritpion
+
+This script aims to create a tidy dataset from the databased presented in:
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+
+Full citation of the project:
+
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. A Public Domain Dataset for Human Activity Recognition Using Smartphones. 21th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning, ESANN 2013. Bruges, Belgium 24-26 April 2013.
+
+
+## Input and output data
+
+The input data from this script can be found at:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+However, when running the script, a local copy stored in the same folder of the script will be used.
+
+The output of this script is a dataframe (x) containging a tidy dataset with the conditions stated in the detailed description. Note that this dataframe is not written in any output file.
+
+
+
+## Detailed description
+A description of all the steps performed to obtain the final tidy dataset is provided herein. The listing numbers correspond to the comments included in the run_analysis.R file. 
+
+### 0. Reading data
+
+The read.table function is used to read the data contained in the following files, corresponding to the test and training sets:
+
+* X_test.txt and X_train.txt - measurements taken
+* y_test.txt and y_train.txt - acitivities corresponding to each measurement 
+* subject_test.txt and subject_train.txt- subjects that performed the activities
+
+As an example, the code for the reading the files from the training set is:
+
+```{r, eval=FALSE}
+
+#TRAIN set
+measurements_train=read.table("./UCI HAR Dataset/train/X_train.txt")
+activities_train=read.table("./UCI HAR Dataset/train/y_train.txt") 
+subjects_train=read.table("./UCI HAR Dataset/train/subject_train.txt") 
+```
+
+The read.table function was also used to read both the acitivty names (from activity_labels.txt) and the feature labels (features.txt).
+
+
+
+
+### 1. Merges the training and the test sets to create one data set.
+
+To merge both datasets, the rbind() function was used for the measurements, the activities and the subjects (note that the data are put in a dataframe format later on, as it is not necessary to do so for the incomming steps, and it is simpler to do it once the features to be included have been selected).
+
+Data from test and training sets were merged as follows:
+```{r, eval=FALSE}
+all_data=rbind(measurements_train,measurements_test)
+all_activities=rbind(activities_train,activities_test)
+all_subjects=rbind(subjects_train,subjects_test)
+```
+
+
+### 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+To select the features representing the mean and standard deviation for each measurement, the function grep() was used:
+
+```{r, eval=FALSE}
+sss=grep("mean",feature_names$V2)
+sss2=grep("std",feature_names$V2)
+```
+ Indexes contained in the vectors sss and sss2 correspond to the features to be selected for the new dataset.
+ 
+
+### 3. Uses descriptive activity names to name the activities in the data set
+In order to name the activities coded with numbers from 1 to 6, the information previously read from the activity_labels.txt file will be used. The R function factor() will convert those nummeric levels into the corresponding labels:
+
+```{r, echo=FALSE}
+activity_names
+
+```
+
+The code used to associate those descriptive names to the activities was:
+
+```{r, eval=FALSE}
+actNames=factor(all_activities$V1,levels=activity_names$V1,labels=activity_names$V2)
+```
+
+
+### 4. Appropriately labels the data set with descriptive variable names. 
+
+The variable names provided in the original dataset are descriptive enough (so far) as contain the definition of the measurement performed as well as the XYZ component and have not been modified. 
+Therefore, the feature names considered are:
+
+```{r, echo=FALSE}
+extracted_features=feature_names$V2[ss3]
+extracted_features
+```
+
+
+### 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
+
+At this point, a dataframe is created with all the relevant information:
+
+* The Activity Names
+* The subjects IDs
+* The feautures corresponding to the mean and standard deviations of the measurements.
+
+Data are ordered by activity name and by subject within each activity:
+
+```{r}
+dataset[1:3,1:4]
+
+```
+
+To create the new dataset containing the averages per subject and activity of each of the features, the melt() and dcast():
+
+```{r eval=FALSE}
+
+dmelt=melt(dataset,id.vars=c("ActivityName","IDSubject"))
+x=dcast(dmelt,ActivityName+IDSubject ~variable,mean)
+```
+
+At this point, the labels used for the features are not that descriptive, as they are not the original measures but the average of groups of them. Therefor, the word "Average" is added before all the labels in order to distinguish them from the previous ones.
+
+New features are:
+
+```{r}
+feat_c=paste("Average",as.character(extracted_features))
+feat_c
+```
+
+Now the new tidy dataset is ready. The first 3 rows and 4 columns are shown below as an example:
+
+```{r}
+x[1:3,1:4]
+```
+
+
+
+

@@ -1,0 +1,149 @@
+---
+title: "Codebook"
+author: "Carmen Gonzalez"
+date: "Sunday, May 24, 2015"
+output: html_document
+---
+
+## Global Description
+
+"The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+* tBodyAcc-XYZ
+* tGravityAcc-XYZ
+* tBodyAccJerk-XYZ
+* tBodyGyro-XYZ
+* tBodyGyroJerk-XYZ
+* tBodyAccMag
+* tGravityAccMag
+* tBodyAccJerkMag
+* tBodyGyroMag
+* tBodyGyroJerkMag
+* fBodyAcc-XYZ
+* fBodyAccJerk-XYZ
+* fBodyGyro-XYZ
+* fBodyAccMag
+* fBodyAccJerkMag
+* fBodyGyroMag
+* fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are: 
+
+* mean(): Mean value
+* std(): Standard deviation
+* meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+
+
+Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+
+* gravityMean
+* tBodyAccMean
+* tBodyAccJerkMean
+* tBodyGyroMean
+* tBodyGyroJerkMean". 
+
+
+This description explains were all the features come from and is extracted from:
+
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. A Public Domain Dataset for Human Activity Recognition Using Smartphones. 21th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning, ESANN 2013. Bruges, Belgium 24-26 April 2013.
+
+The dataset created is composed by 180 rows and 81 columns. Each row represents an observation (the average of the selected feature per subject and activity). The first two columns identify the activity that was performed and the subject who performed it, and all the others correspond to averages measurents for each feature described above.
+
+All the measurments are normalized, represented in values between -1 and 1.
+
+
+
+## Variables Description
+
+Although a descritpion was provided of the whole original dataset, this section includes a description of the kind of values of the variables of the tidy dataset created. The list number corresponds to the column o each feature, and the name provided is its label.
+
+1. ActivityName: Factor Variable. 6 levels: Walking, Walking_upstairs, Sitting, Standing, Laying                            
+2. IDSubject: Integer value (from 1 to 30)                             
+3. Average tBodyAcc-mean()-X numeric (normalized [-1,1])               
+4. Average tBodyAcc-mean()-Y numeric (normalized [-1,1])            
+5. Average tBodyAcc-mean()-Z numeric (normalized [-1,1])
+6. Average tGravityAcc-mean()-X numeric (normalized [-1,1])           
+7. Average tGravityAcc-mean()-Y numeric (normalized [-1,1])
+8. Average tGravityAcc-mean()-Z numeric (normalized [-1,1])          
+9. Average tBodyAccJerk-mean()-X numeric (normalized [-1,1])
+10. Average tBodyAccJerk-mean()-Y numeric (normalized [-1,1])         
+11. Average tBodyAccJerk-mean()-Z numeric (normalized [-1,1])         
+12. Average tBodyGyro-mean()-X numeric (normalized [-1,1])             
+13. Average tBodyGyro-mean()-Y numeric (normalized [-1,1])             
+14. Average tBodyGyro-mean()-Z numeric (normalized [-1,1])            
+15. Average tBodyGyroJerk-mean()-X numeric (normalized [-1,1])        
+16. Average tBodyGyroJerk-mean()-Y numeric (normalized [-1,1])        
+17. Average tBodyGyroJerk-mean()-Z numeric (normalized [-1,1])    
+18. Average tBodyAccMag-mean() numeric (normalized [-1,1])            
+19. Average tGravityAccMag-mean() numeric (normalized [-1,1])         
+20. Average tBodyAccJerkMag-mean() numeric (normalized [-1,1])        
+21. Average tBodyGyroMag-mean() numeric (normalized [-1,1])           
+22. Average tBodyGyroJerkMag-mean() numeric (normalized [-1,1])       
+23. Average fBodyAcc-mean()-X numeric (normalized [-1,1])              
+24. Average fBodyAcc-mean()-Y numeric (normalized [-1,1])             
+25. Average fBodyAcc-mean()-Z numeric (normalized [-1,1])             
+26. Average fBodyAcc-meanFreq()-X numeric (normalized [-1,1])         
+27. Average fBodyAcc-meanFreq()-Y numeric (normalized [-1,1])         
+28. Average fBodyAcc-meanFreq()-Z numeric (normalized [-1,1])         
+29. Average fBodyAccJerk-mean()-X numeric (normalized [-1,1])          
+30. Average fBodyAccJerk-mean()-Y numeric (normalized [-1,1])         
+31. Average fBodyAccJerk-mean()-Z numeric (normalized [-1,1])         
+32. Average fBodyAccJerk-meanFreq()-X  numeric (normalized [-1,1])    
+33. Average fBodyAccJerk-meanFreq()-Y numeric (normalized [-1,1])     
+34. Average fBodyAccJerk-meanFreq()-Z numeric (normalized [-1,1])     
+35. Average fBodyGyro-mean()-X numeric (normalized [-1,1])              
+36. Average fBodyGyro-mean()-Y numeric (normalized [-1,1])            
+37. Average fBodyGyro-mean()-Z numeric (normalized [-1,1])            
+38. Average fBodyGyro-meanFreq()-X numeric (normalized [-1,1])         
+39. Average fBodyGyro-meanFreq()-Y numeric (normalized [-1,1])        
+40. Average fBodyGyro-meanFreq()-Z numeric (normalized [-1,1])        
+41. Average fBodyAccMag-mean() numeric (normalized [-1,1])            
+42. Average fBodyAccMag-meanFreq() numeric (normalized [-1,1])        
+43. Average fBodyBodyAccJerkMag-mean() numeric (normalized [-1,1])     
+44. Average fBodyBodyAccJerkMag-meanFreq() numeric (normalized [-1,1])
+45. Average fBodyBodyGyroMag-mean() numeric (normalized [-1,1])       
+46. Average fBodyBodyGyroMag-meanFreq() numeric (normalized [-1,1])   
+47. Average fBodyBodyGyroJerkMag-mean() numeric (normalized [-1,1])    
+48. Average fBodyBodyGyroJerkMag-meanFreq() numeric (normalized [-1,1])
+49. Average tBodyAcc-std()-X numeric (normalized [-1,1])              
+50. Average tBodyAcc-std()-Y numeric (normalized [-1,1])              
+51. Average tBodyAcc-std()-Z numeric (normalized [-1,1])              
+52. Average tGravityAcc-std()-X numeric (normalized [-1,1])           
+53. Average tGravityAcc-std()-Y numeric (normalized [-1,1])           
+54. Average tGravityAcc-std()-Z numeric (normalized [-1,1])           
+55. Average tBodyAccJerk-std()-X numeric (normalized [-1,1])    
+56. Average tBodyAccJerk-std()-Y numeric (normalized [-1,1])          
+57. Average tBodyAccJerk-std()-Z numeric (normalized [-1,1])           
+58. Average tBodyGyro-std()-X  numeric (normalized [-1,1])            
+59. Average tBodyGyro-std()-Y numeric (normalized [-1,1])              
+60. Average tBodyGyro-std()-Z numeric (normalized [-1,1])             
+61. Average tBodyGyroJerk-std()-X numeric (normalized [-1,1])          
+62. Average tBodyGyroJerk-std()-Y numeric (normalized [-1,1])         
+63. Average tBodyGyroJerk-std()-Z numeric (normalized [-1,1])          
+64. Average tBodyAccMag-std() numeric (normalized [-1,1])              
+65. Average tGravityAccMag-std() numeric (normalized [-1,1])            
+66. Average tBodyAccJerkMag-std() numeric (normalized [-1,1])         
+67. Average tBodyGyroMag-std() numeric (normalized [-1,1])             
+68. Average tBodyGyroJerkMag-std()  numeric (normalized [-1,1])       
+69. Average fBodyAcc-std()-X numeric (normalized [-1,1])               
+70. Average fBodyAcc-std()-Y numeric (normalized [-1,1])              
+71. Average fBodyAcc-std()-Z numeric (normalized [-1,1])               
+72. Average fBodyAccJerk-std()-X numeric (normalized [-1,1])           
+73. Average fBodyAccJerk-std()-Y numeric (normalized [-1,1])            
+74. Average fBodyAccJerk-std()-Z numeric (normalized [-1,1])           
+75. Average fBodyGyro-std()-X numeric (normalized [-1,1])             
+76. Average fBodyGyro-std()-Y numeric (normalized [-1,1])             
+77. Average fBodyGyro-std()-Z numeric (normalized [-1,1])              
+78. Average fBodyAccMag-std() numeric (normalized [-1,1])             
+79. Average fBodyBodyAccJerkMag-std() numeric (normalized [-1,1])     
+80. Average fBodyBodyGyroMag-std() numeric (normalized [-1,1])        
+81. Average fBodyBodyGyroJerkMag-std() numeric (normalized [-1,1])   
+
+
